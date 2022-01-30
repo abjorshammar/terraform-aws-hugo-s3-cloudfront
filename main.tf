@@ -33,11 +33,6 @@ resource "aws_s3_bucket" "hugo" {
   }
 }
 
-// Get ACM cert for use with CloudFront
-data "aws_acm_certificate" "cert" {
-  domain = var.cert_domain
-}
-
 /*
  * Create CloudFront distribution for SSL support but caching disabled, leave that to Cloudflare
  */
@@ -100,7 +95,7 @@ resource "aws_cloudfront_distribution" "hugo" {
   price_class = var.cf_price_class
 
   viewer_certificate {
-    acm_certificate_arn      = data.aws_acm_certificate.cert.arn
+    acm_certificate_arn      = var.acm_arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = var.minimum_viewer_tls_version
   }

@@ -14,11 +14,6 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "cert_domain" {
-  description = "Domain name on ACM certificate"
-  type        = string
-}
-
 variable "cf_default_ttl" {
   description = "CloudFront default TTL for cachine"
   type        = string
@@ -150,5 +145,10 @@ variable "viewer_protocol_policy" {
 
 variable "deployment_user_arn" {
   description = "ARN for user who is able to put objects into S3 bucket"
+  type        = string
+}
+
+variable "acm_arn" {
+  description = "ARN for the ACM cert"
   type        = string
 }
